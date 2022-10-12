@@ -1,7 +1,6 @@
 name: rw_base
 description: A new Flutter project.
 version: 0.0.1
-homepage:
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
@@ -10,6 +9,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  #框架
+  #https://pub.dev/packages/logger
+  logger: 1.1.0
+
+  #原生插件
+  #https://pub.flutter-io.cn/packages/url_launcher
+  url_launcher: 6.0.17
+  #https://pub.flutter-io.cn/packages/video_compress
+  video_compress: 3.1.1
 
 dev_dependencies:
   flutter_test:

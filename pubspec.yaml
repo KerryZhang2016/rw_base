@@ -13,12 +13,16 @@ dependencies:
   #框架
   #https://pub.dev/packages/logger
   logger: 1.1.0
+  #https://pub.dev/packages/image (手写签名 - 转图片)
+  image: 3.2.0
 
   #原生插件
   #https://pub.flutter-io.cn/packages/url_launcher
   url_launcher: 6.0.17
   #https://pub.flutter-io.cn/packages/video_compress
   video_compress: 3.1.1
+  #https://pub.flutter-io.cn/packages/device_info_plus
+  device_info_plus: 3.1.1
 
 dev_dependencies:
   flutter_test:

@@ -2,18 +2,31 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 /// 设备信息工具类
 class DeviceUtil {
+  static const bool inProduction = bool.fromEnvironment("dart.vm.product");
+
   static IosDeviceInfo? _iosDeviceInfo;
   static AndroidDeviceInfo? _androidDeviceInfo;
-  static const bool inProduction = bool.fromEnvironment("dart.vm.product");
+  static WebBrowserInfo? _webBrowserInfo;
+
+  static bool isIOS() {
+    return !kIsWeb && Platform.isIOS;
+  }
+
+  static bool isAndroid() {
+    return !kIsWeb && Platform.isAndroid;
+  }
 
   static void initDeviceInfo() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if(Platform.isIOS){
+    if (kIsWeb) {
+      _webBrowserInfo = await deviceInfo.webBrowserInfo;
+    } else if (isIOS()) {
       _iosDeviceInfo = await deviceInfo.iosInfo;
-    }else if(Platform.isAndroid){
+    } else if (isAndroid()) {
       _androidDeviceInfo = await deviceInfo.androidInfo;
     }
   }
@@ -21,13 +34,23 @@ class DeviceUtil {
   static String getChannel() => "default";
 
   static String getPlatform() {
-    return Platform.isIOS ? "iOS" : "Android";
+    if (kIsWeb) {
+      return "Web";
+    } else if (isIOS()) {
+      return "iOS";
+    } else if (isAndroid()) {
+      return "Android";
+    } else {
+      return "unknown";
+    }
   }
 
   static String getBrand() {
-    if (Platform.isIOS && _iosDeviceInfo != null) {
+    if (kIsWeb && _webBrowserInfo != null) {
+      return _webBrowserInfo!.browserName.name;
+    } else if (isIOS() && _iosDeviceInfo != null) {
       return _iosDeviceInfo!.model ?? "";
-    } else if (Platform.isAndroid && _androidDeviceInfo != null) {
+    } else if (isAndroid() && _androidDeviceInfo != null) {
       return "${_androidDeviceInfo!.brand}";
     } else {
       return "unknown";
@@ -36,9 +59,11 @@ class DeviceUtil {
 
   /// return [H8296] [iPhone]
   static String getDevice() {
-    if (Platform.isIOS && _iosDeviceInfo != null) {
+    if (kIsWeb && _webBrowserInfo != null) {
+      return _webBrowserInfo!.browserName.name;
+    } else if (isIOS() && _iosDeviceInfo != null) {
       return _iosDeviceInfo!.model ?? "";
-    } else if (Platform.isAndroid && _androidDeviceInfo != null) {
+    } else if (isAndroid() && _androidDeviceInfo != null) {
       return "${_androidDeviceInfo!.brand}_${_androidDeviceInfo!.model}";
     } else {
       return "unknown";
@@ -46,9 +71,11 @@ class DeviceUtil {
   }
 
   static String getDeviceId() {
-    if (Platform.isIOS && _iosDeviceInfo != null) {
+    if (kIsWeb && _webBrowserInfo != null) {
+      return _webBrowserInfo!.userAgent ?? "";
+    } else if (isIOS() && _iosDeviceInfo != null) {
       return _iosDeviceInfo!.identifierForVendor ?? "";
-    } else if (Platform.isAndroid && _androidDeviceInfo != null) {
+    } else if (isAndroid() && _androidDeviceInfo != null) {
       return _androidDeviceInfo!.androidId ?? "";
     } else {
       return "unknown";
@@ -57,9 +84,9 @@ class DeviceUtil {
 
   /// return [27] [11.3]
   static String getOsVersion() {
-    if (Platform.isIOS && _iosDeviceInfo != null) {
+    if (isIOS() && _iosDeviceInfo != null) {
       return _iosDeviceInfo!.systemVersion ?? "";
-    } else if (Platform.isAndroid && _androidDeviceInfo != null) {
+    } else if (isAndroid() && _androidDeviceInfo != null) {
       return _androidDeviceInfo!.version.sdkInt.toString();
     } else {
       return "unknown";
@@ -68,7 +95,7 @@ class DeviceUtil {
 
   static void setOrientationLandLeft() {
     SystemChrome.setPreferredOrientations([
-      Platform.isAndroid ? DeviceOrientation.landscapeLeft : DeviceOrientation.landscapeRight,
+      isAndroid() ? DeviceOrientation.landscapeLeft : DeviceOrientation.landscapeRight,
     ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }

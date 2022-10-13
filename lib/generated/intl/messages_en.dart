@@ -22,8 +22,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "base_already_send_msg":
+            MessageLookupByLibrary.simpleMessage("Has been sent"),
+        "base_btn_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "base_btn_complete": MessageLookupByLibrary.simpleMessage("Finish"),
+        "base_btn_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "base_friday": MessageLookupByLibrary.simpleMessage("Friday"),
+        "base_get_check_code":
+            MessageLookupByLibrary.simpleMessage("Get verification code"),
         "base_monday": MessageLookupByLibrary.simpleMessage("Monday"),
+        "base_placeholder_two": MessageLookupByLibrary.simpleMessage("- -"),
         "base_saturday": MessageLookupByLibrary.simpleMessage("Saturday"),
         "base_sunday": MessageLookupByLibrary.simpleMessage("Sunday"),
         "base_thursday": MessageLookupByLibrary.simpleMessage("Thursday"),

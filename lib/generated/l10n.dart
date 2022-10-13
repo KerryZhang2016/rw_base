@@ -50,6 +50,46 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `- -`
+  String get base_placeholder_two {
+    return Intl.message(
+      '- -',
+      name: 'base_placeholder_two',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get base_btn_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'base_btn_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get base_btn_confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'base_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finish`
+  String get base_btn_complete {
+    return Intl.message(
+      'Finish',
+      name: 'base_btn_complete',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Monday`
   String get base_monday {
     return Intl.message(
@@ -115,6 +155,26 @@ class S {
     return Intl.message(
       'Sunday',
       name: 'base_sunday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get verification code`
+  String get base_get_check_code {
+    return Intl.message(
+      'Get verification code',
+      name: 'base_get_check_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Has been sent`
+  String get base_already_send_msg {
+    return Intl.message(
+      'Has been sent',
+      name: 'base_already_send_msg',
       desc: '',
       args: [],
     );

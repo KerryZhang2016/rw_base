@@ -1,9 +1,15 @@
 {
+  "base_placeholder_two": "- -",
+  "base_btn_cancel": "Cancel",
+  "base_btn_confirm": "Confirm",
+  "base_btn_complete": "Finish",
   "base_monday": "Monday",
   "base_tuesday": "Tuesday",
   "base_wednesday": "Wednesday",
   "base_thursday": "Thursday",
   "base_friday": "Friday",
   "base_saturday": "Saturday",
-  "base_sunday": "Sunday"
+  "base_sunday": "Sunday",
+  "base_get_check_code": "Get verification code",
+  "base_already_send_msg": "Has been sent"
 }
